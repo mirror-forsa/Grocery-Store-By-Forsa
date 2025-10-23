@@ -1,0 +1,927 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@300;0,400;0,500;1,300&display=swap');
+/* ================================
+   全局 CSS 变量（Root Variables）
+   在 :root 中定义全局可复用的颜色、阴影、边框样式等
+================================ */
+:root {
+    --green: green; /* 绿色，用于按钮、链接、高亮等 */
+    --black: #130f40; /* 主黑色/深色字体 */
+    --light-color: #666; /* 浅灰色字体或辅助文字颜色 */
+    --box-shadow: 0 .5rem 1.5rem rgba(0,0,0,0.2); /* 全局阴影效果 */
+    --outline: .1rem solid rgba(0,0,0,0.1); /* 可用于输入框或元素外边框 */
+    --border: 1px solid black;
+}
+
+/* ================================
+   全局通用样式（Reset + Base Styles）
+   * 选择器会作用于所有元素
+================================ */
+* {
+    font-family: 'Poppins', sans-serif; /* 全局字体 */
+    margin: 0; /* 清除默认外边距 */
+    padding: 0; /* 清除默认内边距 */
+    box-sizing: border-box; /* 让宽高包含 padding 和 border，方便布局 */
+    outline: none; /* 去掉聚焦时的默认轮廓线（如 input 框） */
+    border: none; /* 去掉默认边框 */
+    text-decoration: none; /* 去掉链接下划线 */
+    text-transform: capitalize; /* 首字母大写 */
+    transition: all .2s linear; /* 元素变化过渡效果，方便 hover/动画 */
+}
+
+
+/* 
+  HTML 根元素样式
+  - font-size: 62.5% → 将根字体大小设置为 62.5%，方便使用 rem 单位计算（1rem = 10px，假设浏览器默认16px）
+  - overflow-x: hidden → 禁止水平滚动，避免内容溢出导致横向滚动条
+  - scroll-behavior: smooth → 启用平滑滚动效果（锚点跳转、滚动动画）
+  - scroll-padding-top: 7rem → 为锚点滚动预留顶部间距（通常用于固定 header）
+*/
+html
+{
+	margin: 0;
+	font-size: 62.5%;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	scroll-padding-top: 7rem;
+	scroll-padding-bottom: 7rem;
+	height: 100%;
+}
+
+
+
+/*背景板主题是灰色*/
+body
+{
+	background: #eee;
+	min-height: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+
+/*css code for banner*/
+section
+{
+	padding: 3rem 1%;
+	flex: 1;
+}
+
+.heading
+{
+	text-align: center;
+	padding: 2rem 0;
+	padding-bottom: 3.5rem;
+	font-size: 3.5rem;
+	color: var(--black);
+}
+
+.heading span
+{
+	background: var(--green);
+	color: #fff;
+	display: inline-block;
+	padding: .5rem 3rem;
+	clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%,7% 50%,0% 0%);/*剪辑图形*/
+}
+
+.btn
+{
+	border: .2px solid var(--black);
+	margin-top: 1rem;
+	display: inline-block;
+	padding: .8rem 3rem;
+	font-size: 1.7rem;
+	border-radius: .5rem;
+	color: var(--black);
+	cursor: pointer;
+	background: none;
+}
+
+.btn:hover
+{
+	background: var(--green);
+	color: #fff;
+}
+/* 
+  页眉样式（Header）
+  - 边框：0px 实线（没有边框，可修改或保留占位）
+  - 固定定位：header 固定在页面顶部
+  - top/left/right: 0 → 顶部、左右贴边
+  - 布局：使用 flex 布局，水平排列子元素
+  - 对齐：垂直居中（align-items: center），水平两端对齐（justify-content: space-between）
+  - 内边距：上下 2rem，左右 9%（响应式间距）
+  - 背景色：白色
+  - 阴影：使用全局变量 --box-shadow
+*/
+.header
+{
+	border: 0px solid;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2rem 9%;
+	background: #fff;
+	box-shadow: var(--box-shadow);
+	z-index: 1000;
+}
+
+/*.hear .logo 中间需要有空格 设置字体大小Grocery*/
+.header .logo
+{
+	font-size: 3rem;
+	font-weight: bolder;
+}
+
+/* 设置logo颜色*/
+.header .logo i
+{
+	color: var(--green);
+}
+
+/*设置navbar基本属性*/
+.header .navbar a
+{
+	font-size: 1.7rem;
+	margin: 2rem;
+	color: var(--black);
+}
+
+/*鼠标悬停导航链接时，文字变为绿色 */
+.header .navbar a:hover
+{
+	color: var(--green);	
+}
+
+
+/* 每个图标块样式 */
+.header .icons div {
+    border: 1px solid;           /* 边框，颜色默认或可后续指定 */
+    height: 4.5rem;              /* 高度 */
+    width: 4.5rem;               /* 宽度 */
+    line-height: 4.5rem;         /* 行高，使图标垂直居中 */
+    border-radius: .5rem;        /* 圆角，0.5rem */
+    background: #eee;            /* 背景色为浅灰色 */
+    color: var(--black);         /* 图标颜色，使用全局黑色变量 */
+    font-size: 2rem;             /* 图标字体大小 */
+    margin-right: .3rem;       	 /* 图标之间的小间距 */
+    text-align: center;          /* 水平居中图标 */
+    cursor: pointer;             /* 鼠标悬停时显示手型，提示可点击 */
+}
+
+/* 鼠标悬停效果 */
+.header .icons div:hover {
+    background: var(--green);    /* 背景变为绿色 */
+    color: white;                /* 图标颜色变为白色 */
+}
+
+/*隐藏导航*/
+#menu-btn
+{
+	display: none;
+}
+
+.header .navbar.active
+{
+	right: 2rem;
+	transition: .4s linear;
+}
+
+/* 搜索表单容器 */
+.header .search-form 
+{
+    border: 0px solid;             /* 没有边框，仅占位，可自定义 */
+    position: absolute;             /* 绝对定位，方便弹出到 header 下方 */
+    top: 110%;                      /* 放置在 header 下方，略高于 header 高度 */
+    right: -110%;                    /* 距右边 2rem */
+    width: 50rem;                   /* 宽度 50rem，可根据需要调整 */
+    height: 5rem;                 /* 高度 4.5rem，与 header 图标块高度一致 */
+    background: #fff;               /* 背景白色，突出输入区域 */
+    border-radius: .5rem;           /* 圆角，0.5rem */
+    overflow: hidden;               /* 内容超出部分隐藏，注意会裁剪阴影 */
+    display: flex;                  /* 内部使用 flex 布局 */
+    align-items: center;            /* 垂直居中 input 和 label */
+    box-shadow: var(--box-shadow);  /* 使用全局阴影变量 */
+}
+
+/*控制搜索框弹出的速度，以及到达的位置，需要使用script.js*/
+.header .search-form.active
+{
+	right: 2rem;
+	transition: .4s linear;
+}
+
+/* 搜索输入框 */
+.header .search-form input 
+{
+    height: 100%;                   /* 高度填满容器 */
+    width: 100%;                    /* 宽度填满容器 */
+    background: none;               /* 去掉默认背景色 */
+    text-transform: none;           /* 不使用首字母大写，保持输入原样 */
+    font-size: 1.6rem;              /* 输入文字大小 */
+    color: var(--black);            /* 输入文字颜色，使用全局黑色变量 */
+    padding: 0 1.5rem;              /* 左右内边距，保持输入内容与边框距离 */
+}
+
+
+/* 搜索图标标签 */
+.header .search-form label {
+    font-size: 2.2rem;              /* 图标大小 */
+    padding-right: 1.5rem;          /* 图标与输入框右边距 */
+    color: var(--black);            /* 图标颜色 */
+    cursor: pointer;                /* 鼠标悬停显示手型，提示可点击 */
+}
+
+/* 鼠标悬停效果 */
+.header .search-form label:hover
+{
+	color: var(--green);
+}
+
+
+/*购物车模板*/
+.header .shopping-cart 
+{
+    border: 0px solid;               /* 外框细线，可自行指定颜色 */
+    position: absolute;              /* 相对于 header 绝对定位 */
+    top: 110%;                       /* 紧贴 header 底部 */
+    right: -110%;                     /* 右边距 2rem */
+    padding: 1rem;                   /* 内边距 */
+    border-radius: .5rem;            /* 圆角 */
+    box-shadow: var(--box-shadow);   /* 全局阴影变量 */
+    width: 35rem;                    /* 固定宽度 */
+    background: #fff;                /* 白色背景 */
+}
+
+.header .shopping-cart.active
+{
+	right: 2rem;
+	transition: .4s linear;
+}
+
+
+/* 每个商品条目（Box） */
+.header .shopping-cart .box 
+{
+    border: 0px solid blue;          /* 调试时可见的蓝色边框（现在为0） */
+    display: flex;                   /* 横向布局 */
+    align-items: center;             /* 垂直居中 */
+    gap: 1rem;                       /* 元素之间的间距 */
+    position: relative;              /* 为绝对定位的图标提供参照 */
+    margin: 1rem 0;                  /* 上下外边距 */
+}
+
+/* 商品图片 */
+.header .shopping-cart .box img {
+    height: 10rem;                   /* 固定图片高度 */
+}
+
+/* 垃圾桶图标（删除按钮） */
+.header .shopping-cart .box .fa-trash {
+    font-size: 2rem;                 /* 图标大小 */
+    position: absolute;              /* 绝对定位在 box 内右侧 */
+    top: 50%;                        /* 垂直居中 */
+    right: 2rem;                     /* 右边距 */
+    cursor: pointer;                 /* 鼠标变手型 */
+    color: var(--light-color);       /* 初始颜色为浅灰 */
+    transform: translateY(-50%);     /* 修正垂直居中位置 */
+}
+
+/* 鼠标悬停时，图标变红 */
+.header .shopping-cart .box .fa-trash:hover {
+    color: red;                      /* 红色高亮，表示删除动作 */
+}
+
+.header .shopping-cart .box .content h3
+{
+	color:var(--black);
+	font-size: 1.7rem;
+	padding-bottom: 1rem;
+}
+
+
+.header .shopping-cart .box .content span
+{
+	color:var(--light-color);
+	font-size: 1.6rem;
+}
+
+.header .shopping-cart .box .content .quantity
+{
+	padding-left: 1rem;
+}
+
+.header .shopping-cart .total
+{
+	font-size: 2.5rem;
+	padding: 1rem 0;
+	text-align: center;
+	color: var(--black);
+}
+
+.header .shopping-cart .btn
+{
+	display: block;
+	text-align: center;
+	margin: 1rem 0; 
+}
+
+.header .login-form
+{
+	border: 0px solid;
+	position: absolute;
+	width: 40rem;
+	top: 110%;
+	right: -110%; 
+	box-shadow: var(--box-shadow);
+	padding: 2rem;
+	border-radius: .5rem;
+	background: #fff;
+	text-align: center;
+}
+
+.header .login-form.active
+{
+	right: 2rem;
+	transition: .4s linear;
+}
+
+.header .login-form h3
+{
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	color: var(--black);
+}
+
+.header .login-form .box
+{
+	width: 100%;
+	border: 0px solid;
+	margin: .7rem 0;
+	background: #eee;
+	border-radius: .5rem;
+	padding: 1rem;
+	font-size: 1.6rem;
+	color: var(--black);
+	text-transform: none;
+
+}
+
+.header .login-form p
+{
+	font-size: 1.4rem;
+	padding: .5rem 0;
+	color: var(--light-color);
+}
+
+.header .login-form p a
+{
+	color: blue;
+	text-decoration: underline;
+}
+
+
+.home 
+{
+	border: 0px solid;
+	display: flex;
+	justify-content: center;
+	background: url(../image/banner-img.jpg) no-repeat;
+	background-position: center;
+	background-size: cover;
+	padding-top: 17rem;
+	padding-bottom: 17rem;
+}
+
+.home .content
+{
+	border: 0px solid;
+	text-align: center;
+	width: 60rem;
+}
+
+.home .content h3
+{
+	color: var(--black);
+	font-size: 4rem;
+}
+
+
+.home .content h3 span
+{
+	color: var(--green);
+}
+
+.home .content p
+{
+	color: var(--light-color);
+	font-size: 2rem;
+	padding: 1rem 0;
+	line-height: 1.8;
+}
+
+
+/*features*/
+.features .box-container
+{
+	border: 0px solid;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+	gap: 1.5rem;
+	padding: 0 10rem;
+}
+
+.features .box-container .box
+{
+	border: 0px solid red;
+	padding: 10rem 1rem;
+	background: #fff;
+	outline: var(--outline);
+	outline-offset: -1rem;
+	text-align: center;
+	box-shadow: var(--box-shadow);
+
+}
+
+.features .box-container .box:hover
+{
+	box-shadow: 1px 1px 10px 1px var(--green);
+}
+
+.features .box-container .box img
+{
+	margin: 1rem 0;
+	height: 15rem;
+}
+
+.features .box-container .box h3
+{
+	font-size: 2.5rem;
+	line-height: 1.8;
+	color: var(--black);
+}
+
+.features .box-container .box p
+{
+	font-size: 1.5rem;
+	line-height: 1.8;
+	color: var(--light-color);
+	padding-bottom: 1rem;
+}
+/*features*/
+
+/*products*/
+
+.products .product-slider
+{
+	border: 0px solid;
+	padding: 1rem;
+	max-width: 90%;
+	margin: 0 auto;
+
+}
+
+.products .product-slider:first-child
+{
+	margin-bottom: 3rem;
+
+}
+
+.products .product-slider .box
+{
+	border: 0px solid red;
+	background: #fff;
+	border-radius: .5rem;
+	text-align: center;
+	padding: 2rem 1rem;
+	outline-offset: -1rem;
+	outline: var(--outline);
+	box-shadow: var(--box-shadow);
+	transition: .2s linear;
+
+}
+
+.products .product-slider .box:hover
+{
+	box-shadow: 1px 1px 10px 4px var(--green);
+}
+
+.products .product-slider .box img
+{
+	height: 20rem;
+}
+
+.products .product-slider .box h1
+{
+	font-size: 2.5rem;
+	color: var(--black);
+}
+
+
+.products .product-slider .box .price
+{
+	font-size: 2rem;
+	color: var(--light-color);
+	padding: .5rem 0;
+}
+
+.products .product-slider .box .stars i
+{
+	font-size: 1.7rem;
+	color: orange;
+	padding: .5rem 0;
+}
+/*products*/
+
+/*Categories*/
+.categories .box-container
+{
+	border: 0px solid;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+	gap: 1.5rem;
+	padding: 0 10rem;
+}
+
+.categories .box-container .box
+{
+	border: 0px solid red;
+	padding: 8rem 1rem;
+	background: #fff;
+	border-radius: .5rem;
+	outline: var(--outline);
+	outline-offset: -1rem;
+	text-align: center;
+	box-shadow: var(--box-shadow);
+
+}
+
+.categories .box-container .box:hover
+{
+	box-shadow: 1px 1px 10px 4px var(--green);
+}
+
+
+.categories .box-container .box img
+{
+	margin: 1rem 0;
+	height: 15rem;
+}
+
+.categories .box-container .box h3
+{
+	font-size: 2rem;
+	color: var(--black);
+	line-height: 1.8;
+}
+
+.categories .box-container .box p
+{
+	font-size: 1.7rem;
+	color: var(--light-color);
+	line-height: 1.8;
+	padding: 1rem 0;
+}
+/*Categories*/
+
+/*Review*/
+.review .review-slider
+{
+	border: 0px solid black;
+    padding: 0.2rem; /* 边框内边距 */
+    max-width: 1400px; /* 控制最大宽度 */
+}
+
+
+.review .review-slider .box
+{
+	border: 0px solid red;
+	background: #fff;
+	border-radius: .5rem;
+	text-align: center;
+	padding: 5rem 2rem;
+	outline-offset: -1rem;
+	outline: var(--outline);
+	box-shadow: var(--box-shadow);
+	transition: .2s linear;
+}
+
+.review .review-slider .box:hover
+{
+	box-shadow: 1px 1px 10px 4px var(--green);
+}
+
+.review .review-slider .box img
+{
+	height: 8rem;
+	width: 8rem;
+	border-radius: 50%;
+}
+
+.review .review-slider .box p
+{
+	padding: 1rem 0;
+	line-height: 1.8;
+	color: var(--light-color);
+	font-size: 1.5rem;
+}
+
+.review .review-slider .box h3
+{
+	padding-bottom: .5rem;
+	color: var(--black);
+	font-size: 2.2rem;
+}
+
+.review .review-slider .box .stars i
+{
+	color:  orange;
+	font-size: 1.7rem;
+}
+	
+/*Review*/
+
+/*Blogs*/
+.blogs .box-container
+{
+	border: 0px solid;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+	gap: 1.5rem;
+	max-width: 75%;
+	margin:  auto;
+}
+
+.blogs .box-container .box
+{
+	overflow: hidden;
+	border-radius: 2rem;
+	box-shadow: var(--box-shadow);
+	background: #fff;
+	height: auto;      /* 可以改成固定高度，比如 25rem */
+    padding: 1rem;     /* 内容内边距更小 */
+}
+
+.blogs .box-container .box img
+{
+	height: 30rem;
+	width: 100%;
+	object-fit: cover;
+}
+
+.blogs .box-container .box .content
+{
+	padding: 3rem;
+}
+
+.blogs .box-container .box .content .icons
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 1.5rem;
+	margin-bottom: 1rem;
+	border-bottom: var(--border);
+}
+
+
+.blogs .box-container .box .content .icons a
+{
+	color: var(--light-color);
+	font-size: 1.5rem;
+}
+
+.blogs .box-container .box .content .icons a:hover
+{
+	color: var(--black);
+}
+
+.blogs .box-container .box .content .icons a i
+{
+	color: green;
+	padding-right: .5rem;
+}
+
+.blogs .box-container .box .content h3
+{
+	line-height: 1.8;
+	color: var(--black);
+	font-size: 2rem;
+	padding: .5rem;
+}
+
+.blogs .box-container .box .content p
+{
+	line-height: 1.8rem;
+	color: var(--light-color);
+	font-size: 1.5rem;
+	padding: .5rem 0;
+}
+/*Blogs*/
+
+/*footer*/
+.footer {
+    width: 100%;
+    background-color: #fff;
+    padding: 2rem 9%;
+    margin-top: auto;
+}
+
+.footer .box-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.footer .box {
+    flex: 1;
+    padding: 1rem;
+}
+
+.footer .box h3 {
+    font-size: 2.5rem;
+    color: var(--black);
+    padding: 1rem 0;
+}
+
+.footer .box h3 i {
+    color: var(--green);
+}
+
+.footer .box p {
+    font-size: 1.5rem;
+    color: var(--light-color);
+    padding: 1rem 0;
+}
+
+.footer .box .share {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.footer .box .share a {
+    display: inline-block;
+    height: 4rem;
+    width: 4rem;
+    line-height: 4rem;
+    border: 1px solid var(--black);
+    border-radius: .5rem;
+    font-size: 2rem;
+    color: var(--black);
+    text-align: center;
+}
+
+.footer .box .share a:hover {
+    background: var(--green);
+    color: #fff;
+}
+
+/* Contact Info 部分 */
+.footer .box .links {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--light-color);
+    padding: .5rem 0;
+}
+
+.footer .box .links i {
+    color: var(--green);
+    padding-right: .5rem;
+}
+
+.footer .box .links:hover {
+    color: var(--green);
+}
+
+/* Quick Links 部分 */
+
+/* Newsletter 部分 */
+.footer .box .email {
+    width: 100%;
+    padding: .8rem;
+    border: 1px solid var(--black);
+    border-radius: .5rem;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    color: var(--black);
+}
+
+.footer .box .btn {
+    border: .2px solid var(--black);
+    padding: .8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    color: var(--black);
+    cursor: pointer;
+    background: none;
+    margin-top: 1rem;
+}
+
+.footer .box .btn:hover {
+    background: var(--green);
+    color: #fff;
+}
+
+.footer .box img {
+    height: 2rem;
+    margin-top: 1rem;
+}
+
+.footer .credit {
+
+    text-align: center;
+    font-size: 2rem;
+    color: #ccc;
+    padding: 1rem;
+    padding-top: 2.5rem;
+    color: var(--black);
+    border-top: var(--border);
+
+}
+
+.footer .credit span
+{
+	color: var(--green);
+}
+
+
+
+
+
+
+/* media queries */
+@media (max-width: 991px) {
+	html {
+		font-size: 55%;
+	}
+
+	.header {
+		padding: 2rem;
+	}
+	section {
+		padding: 2rem;
+	}
+}
+
+@media (max-width: 768px) {
+
+	#menu-btn {
+
+		display: inline-block;
+	}
+
+
+	.header .search-form
+	{
+		width: 80%;
+	}
+
+	.header .navbar {
+		position: absolute;
+		top: 110%;
+		right: -100%;
+		width: 30rem;
+		box-shadow: var(--box-shadow);
+		background: #fff; /* 防止透明重叠 */
+		border-radius: .5rem;
+		transition: .4s linear;/*过滤动画*/
+	}
+
+	.header .navbar a
+	{
+		font-size: 2rem;
+		margin: 2rem 2.5rem;
+		display: block;
+	}
+
+	 .footer {
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .footer .box-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .footer .box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 450px) {
+
+	html {
+		font-size: 50%;
+	}
+	.heading
+	{
+		font-size: 2.5rem;
+	}
+}
